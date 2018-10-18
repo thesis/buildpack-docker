@@ -11,13 +11,13 @@ jobs:
           name: Build Docker image
           command: |
             IMAGE="thesisco/docker-buildpack"
-            TAG="$IMAGE:$(cat ./version.txt)"
+            TAG="$(cat ./version.txt)"
             docker build . -t "$TAG"
             if [[ $CIRCLE_BRANCH == "master" ]]; then
-               docker tag "$TAG" "$IMAGE":latest
-               docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
-               docker push "$IMAGE:$TAG"
-               docker push "$IMAGE:latest"
+              docker tag "$IMAGE:$TAG" "$IMAGE":latest
+              docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+              docker push "$IMAGE:$TAG"
+              docker push "$IMAGE:latest"
             fi
 workflows:
   version: 2
