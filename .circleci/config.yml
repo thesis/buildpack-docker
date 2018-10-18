@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Build Docker image
           command: |
-            IMAGE="thesisco/circleci-buildpack"
+            IMAGE="thesisco/docker-buildpack"
             TAG="$IMAGE:$(cat ./version.txt)"
             docker build . -t "$TAG"
             if [[ $CIRCLE_BRANCH == "master" ]]; then
