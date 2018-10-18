@@ -12,7 +12,7 @@ jobs:
           command: |
             IMAGE="thesisco/docker-buildpack"
             TAG="$(cat ./version.txt)"
-            docker build . -t "$TAG"
+            docker build . -t "$IMAGE:$TAG"
             if [[ $CIRCLE_BRANCH == "master" ]]; then
               docker tag "$IMAGE:$TAG" "$IMAGE":latest
               docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
