@@ -1,0 +1,26 @@
+version: 2
+jobs:
+  docker-build:
+    docker:
+      - image: circleci/buildpack-deps:jessie-curl
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run:
+          name: Build Docker image
+          command: |
+            IMAGE="thesisco/circleci-buildpack"
+            TAG="$IMAGE:$(cat ./version.txt)"
+            docker build . -t "$TAG"
+            if [[ $CIRCLE_BRANCH == "master" ]]; then
+               docker tag "$TAG" "$IMAGE":latest
+               docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+               docker push "$IMAGE:$TAG"
+               docker push "$IMAGE:latest"
+            fi
+workflows:
+  version: 2
+  docker-build:
+    jobs:
+      - docker-build
