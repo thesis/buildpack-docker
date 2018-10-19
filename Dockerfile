@@ -24,4 +24,5 @@ RUN     export CLOUD_SDK_REPO="cloud-sdk-bionic" && \
         gcloud --version && \
         docker --version && kubectl version --client && \
         sudo rm -rf /var/lib/apt/lists/* && \
-        sudo curl -Lo /usr/local/bin/skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo chmod +x /usr/local/bin/skaffold
+        sudo curl -Lo /usr/local/bin/skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && sudo chmod +x /usr/local/bin/skaffold && \
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get | sudo bash
